@@ -20,12 +20,10 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-
-
 @Entity
 @Table(name = "smartphone")
 public class Smartphone {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -38,7 +36,7 @@ public class Smartphone {
 	private int prezzo;
 	@Column(name = "versioneos")
 	private String versioneOS;
-	
+
 	@CreationTimestamp
 	private LocalDateTime createDateTime;
 	@UpdateTimestamp
@@ -47,16 +45,17 @@ public class Smartphone {
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
 	@JoinTable(name = "smartphone_app", joinColumns = @JoinColumn(name = "smartphone_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "app_id", referencedColumnName = "ID"))
 	private Set<App> apps = new HashSet<App>();
-	
-	public Smartphone() {}
-	public Smartphone(String marca,String modello,int prezzo,String versioneOS) {
-		this.marca=marca;
-		this.modello=modello;
-		this.prezzo=prezzo;
-		this.versioneOS=versioneOS;
+
+	public Smartphone() {
 	}
-	
-	
+
+	public Smartphone(String marca, String modello, int prezzo, String versioneOS) {
+		this.marca = marca;
+		this.modello = modello;
+		this.prezzo = prezzo;
+		this.versioneOS = versioneOS;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -127,7 +126,7 @@ public class Smartphone {
 				+ ", versioneOS=" + versioneOS + ", createDateTime=" + createDateTime + ", updateDateTime="
 				+ updateDateTime + ", apps=" + apps + "]";
 	}
-	
+
 	public void addToApps(App appInstance) {
 		this.apps.add(appInstance);
 		appInstance.getSmartphones().add(this);
@@ -137,7 +136,5 @@ public class Smartphone {
 		this.apps.remove(appInstance);
 		appInstance.getSmartphones().remove(this);
 	}
-	
-
 
 }

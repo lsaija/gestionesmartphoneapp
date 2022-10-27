@@ -8,28 +8,24 @@ import it.prova.gestionesmartphoneapp.dao.EntityManagerUtil;
 import it.prova.gestionesmartphoneapp.dao.app.AppDAO;
 import it.prova.gestionesmartphoneapp.model.App;
 
+public class AppServiceImpl implements AppService {
 
-
-
-public class AppServiceImpl implements AppService{
-	
 	private AppDAO appDAO;
-	
+
 	@Override
 	public void setAppDAO(AppDAO appDAO) {
 		this.appDAO = appDAO;
 	}
-	
+
 	@Override
 	public List<App> listAll() throws Exception {
-		
+
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
 		try {
-			
+
 			appDAO.setEntityManager(entityManager);
 
-			
 			return appDAO.list();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -41,11 +37,11 @@ public class AppServiceImpl implements AppService{
 
 	@Override
 	public App caricaSingoloElemento(Long id) throws Exception {
-		
+
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
 		try {
-			
+
 			appDAO.setEntityManager(entityManager);
 
 			return appDAO.get(id);
@@ -60,14 +56,13 @@ public class AppServiceImpl implements AppService{
 
 	@Override
 	public void aggiorna(App AppInstance) throws Exception {
-		
+
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
 		try {
-			
+
 			entityManager.getTransaction().begin();
 
-			
 			appDAO.setEntityManager(entityManager);
 
 			appDAO.update(AppInstance);
@@ -84,13 +79,12 @@ public class AppServiceImpl implements AppService{
 
 	@Override
 	public void inserisciNuovo(App appInstance) throws Exception {
-		
+
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
 		try {
 			entityManager.getTransaction().begin();
 
-			
 			appDAO.setEntityManager(entityManager);
 
 			appDAO.insert(appInstance);
@@ -110,10 +104,9 @@ public class AppServiceImpl implements AppService{
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
 		try {
-			
+
 			entityManager.getTransaction().begin();
 
-			
 			appDAO.setEntityManager(entityManager);
 
 			appDAO.delete(appDAO.get(idApp));
@@ -127,6 +120,7 @@ public class AppServiceImpl implements AppService{
 			EntityManagerUtil.closeEntityManager(entityManager);
 		}
 	}
+
 	public App caricaSingoloElementoEagerSmartphones(Long id) throws Exception {
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
@@ -143,6 +137,5 @@ public class AppServiceImpl implements AppService{
 			EntityManagerUtil.closeEntityManager(entityManager);
 		}
 	}
-	
 
 }

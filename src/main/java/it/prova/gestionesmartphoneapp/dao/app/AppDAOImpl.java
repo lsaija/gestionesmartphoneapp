@@ -7,10 +7,7 @@ import javax.persistence.TypedQuery;
 
 import it.prova.gestionesmartphoneapp.model.App;
 
-
-
-
-public class AppDAOImpl implements AppDAO{
+public class AppDAOImpl implements AppDAO {
 	private EntityManager entityManager;
 
 	@Override
@@ -51,6 +48,7 @@ public class AppDAOImpl implements AppDAO{
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
+
 	@Override
 	public App findByIdFetchingSmartphones(Long id) throws Exception {
 		TypedQuery<App> query = entityManager
